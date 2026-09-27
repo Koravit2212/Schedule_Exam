@@ -1257,6 +1257,304 @@
 
 
     /* =========================
+       CALENDAR VIEW
+    ========================= */
+
+    .calendar-nav {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 10px;
+
+      margin-bottom: 14px;
+
+    }
+
+
+    .calendar-nav-controls {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+    }
+
+
+    .calendar-nav-btn {
+
+      border: 1px solid var(--border);
+
+      background: var(--card);
+
+      color: var(--text);
+
+      border-radius: 8px;
+
+      width: 32px;
+
+      height: 32px;
+
+      font-size: .9rem;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+    .calendar-nav-btn:hover {
+
+      background: var(--card-soft);
+
+    }
+
+
+    .calendar-today-btn {
+
+      border: 1px solid var(--border);
+
+      background: var(--card);
+
+      color: var(--text-soft);
+
+      border-radius: 20px;
+
+      padding: 6px 13px;
+
+      font-size: .74rem;
+
+      font-weight: 600;
+
+    }
+
+
+    .calendar-today-btn:hover {
+
+      color: var(--text);
+
+      border-color: var(--text-soft);
+
+    }
+
+
+    .calendar-month-label {
+
+      margin: 0;
+
+      font-size: 1.05rem;
+
+      font-weight: 700;
+
+      min-width: 150px;
+
+      text-align: center;
+
+    }
+
+
+    .calendar-legend {
+
+      display: flex;
+
+      gap: 14px;
+
+      font-size: .72rem;
+
+      color: var(--text-soft);
+
+    }
+
+
+    .calendar-legend span {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+    }
+
+
+    .calendar-legend i {
+
+      width: 9px;
+
+      height: 9px;
+
+      border-radius: 3px;
+
+      display: inline-block;
+
+    }
+
+
+    .calendar-legend .dot-mid {
+
+      background: var(--mid);
+
+    }
+
+
+    .calendar-legend .dot-final {
+
+      background: var(--final);
+
+    }
+
+
+    .calendar-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(7, 1fr);
+
+      gap: 6px;
+
+    }
+
+
+    .calendar-weekday {
+
+      text-align: center;
+
+      font-size: .7rem;
+
+      font-weight: 700;
+
+      color: var(--text-soft);
+
+      padding-bottom: 4px;
+
+    }
+
+
+    .calendar-day {
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: 10px;
+
+      padding: 6px;
+
+      min-height: 92px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 3px;
+
+    }
+
+
+    .calendar-day.other-month {
+
+      background: var(--card-soft);
+
+      opacity: .5;
+
+    }
+
+
+    .calendar-day.today {
+
+      border: 2px solid var(--primary);
+
+    }
+
+
+    .calendar-day-num {
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: .74rem;
+
+      font-weight: 700;
+
+      color: var(--text-soft);
+
+    }
+
+
+    .calendar-day.today .calendar-day-num {
+
+      color: var(--primary);
+
+    }
+
+
+    .calendar-chip {
+
+      font-size: .62rem;
+
+      line-height: 1.3;
+
+      padding: 2px 6px;
+
+      border-radius: 7px;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+
+      cursor: default;
+
+    }
+
+
+    .calendar-chip.mid {
+
+      background: var(--mid-bg);
+
+      color: var(--mid);
+
+    }
+
+
+    .calendar-chip.final {
+
+      background: var(--final-bg);
+
+      color: var(--final);
+
+    }
+
+
+    .calendar-chip.none {
+
+      background: var(--card-soft);
+
+      color: var(--text-soft);
+
+    }
+
+
+    .calendar-chip-more {
+
+      font-size: .6rem;
+
+      color: var(--text-soft);
+
+      padding: 0 6px;
+
+    }
+
+
+    /* =========================
        EMPTY
     ========================= */
 
@@ -1381,6 +1679,54 @@
       .form-row {
 
         grid-template-columns: 1fr;
+
+      }
+
+
+      .calendar-day {
+
+        min-height: 62px;
+
+        padding: 4px;
+
+      }
+
+
+      .calendar-weekday {
+
+        font-size: .6rem;
+
+      }
+
+
+      .calendar-day-num {
+
+        font-size: .66rem;
+
+      }
+
+
+      .calendar-chip {
+
+        font-size: .56rem;
+
+        padding: 1px 4px;
+
+      }
+
+
+      .calendar-month-label {
+
+        min-width: auto;
+
+        font-size: .95rem;
+
+      }
+
+
+      .calendar-legend {
+
+        display: none;
 
       }
 
@@ -1640,6 +1986,12 @@
         </div>
 
 
+        <div
+          class="hint"
+          id="cloudSyncStatus"
+        ></div>
+
+
       </section>
 
 
@@ -1778,6 +2130,14 @@
           </button>
 
 
+          <button
+            id="viewCalendar"
+            class="view-btn"
+          >
+            🗓️ ปฏิทิน
+          </button>
+
+
         </div>
 
 
@@ -1793,6 +2153,14 @@
 
       <div
         id="tableView"
+        style="display:none"
+      ></div>
+
+
+      <!-- CALENDAR -->
+
+      <div
+        id="calendarView"
         style="display:none"
       ></div>
 
@@ -1826,12 +2194,20 @@
     document.getElementById("tableView");
 
 
+  const calendarView =
+    document.getElementById("calendarView");
+
+
   const btnReport =
     document.getElementById("viewReport");
 
 
   const btnTable =
     document.getElementById("viewTable");
+
+
+  const btnCalendar =
+    document.getElementById("viewCalendar");
 
 
   const viewTitle =
@@ -1897,6 +2273,211 @@
       console.error(error);
 
     }
+
+
+    syncToCloud();
+
+  }
+
+
+  /* ==================================================
+     CLOUD SYNC (สำหรับใช้งานข้ามอุปกรณ์ / มือถือ)
+     ใช้ได้เมื่อเปิดผ่านลิงก์ Artifact ของ Claude ที่ล็อกอินอยู่
+     ถ้าเปิดเป็นไฟล์ HTML เฉยๆ จะยังคงทำงานด้วย localStorage ตามปกติ
+  ================================================== */
+
+  let cloudDoc = null;
+
+  let cloudReady = false;
+
+  let cloudStatusEl = null;
+
+
+  function setCloudStatus(text) {
+
+    if (!cloudStatusEl) {
+
+      cloudStatusEl =
+        document.getElementById(
+          "cloudSyncStatus"
+        );
+
+    }
+
+
+    if (cloudStatusEl) {
+
+      cloudStatusEl.textContent =
+        text || "";
+
+    }
+
+  }
+
+
+  async function initCloudSync() {
+
+    if (
+      typeof window === "undefined" ||
+      !window.claude ||
+      typeof window.claude.use !==
+        "function"
+    ) {
+
+      return;
+
+    }
+
+
+    try {
+
+
+      const db =
+        await window.claude.use(
+          "db"
+        );
+
+
+      if (!db) {
+        return;
+      }
+
+
+      const user =
+        await window.claude.use(
+          "user"
+        );
+
+
+      let uid = null;
+
+
+      if (user) {
+
+        uid = await user.id();
+
+      }
+
+
+      if (!uid) {
+
+        setCloudStatus(
+          "📱 เข้าสู่ระบบ Claude เพื่อซิงก์ข้อมูลข้ามอุปกรณ์"
+        );
+
+        return;
+
+      }
+
+
+      cloudDoc = db.doc(
+        "data/users/" +
+        uid +
+        "/exam-schedule"
+      );
+
+
+      const snap =
+        await cloudDoc.get();
+
+
+      if (
+        snap.exists &&
+        Array.isArray(
+          snap.data().entries
+        )
+      ) {
+
+        entries =
+          snap.data().entries;
+
+        try {
+
+          localStorage.setItem(
+            STORE_KEY,
+            JSON.stringify(
+              entries
+            )
+          );
+
+        } catch (error) {}
+
+        render();
+
+        setCloudStatus(
+          "☁️ ซิงก์ข้อมูลจากบัญชี Claude แล้ว"
+        );
+
+      }
+
+      else if (
+        entries.length > 0
+      ) {
+
+        await cloudDoc.set({
+          entries: entries
+        });
+
+        setCloudStatus(
+          "☁️ อัปโหลดข้อมูลขึ้นบัญชี Claude แล้ว"
+        );
+
+      }
+
+      else {
+
+        setCloudStatus(
+          "☁️ พร้อมซิงก์ข้อมูลข้ามอุปกรณ์"
+        );
+
+      }
+
+
+      cloudReady = true;
+
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
+  }
+
+
+  function syncToCloud() {
+
+    if (!cloudReady || !cloudDoc) {
+      return;
+    }
+
+
+    cloudDoc
+      .set({
+        entries: entries
+      })
+      .then(
+        function () {
+
+          setCloudStatus(
+            "☁️ ซิงก์ล่าสุดแล้ว"
+          );
+
+        }
+      )
+      .catch(
+        function (error) {
+
+          console.error(
+            error
+          );
+
+          setCloudStatus(
+            "⚠️ ซิงก์ไม่สำเร็จ ข้อมูลยังอยู่ในเครื่องนี้"
+          );
+
+        }
+      );
 
   }
 
@@ -2776,6 +3357,508 @@
 
 
     bindActions(tableView);
+
+  }
+
+
+  /* ==================================================
+     CALENDAR VIEW
+     แสดงวันสอบแบบปฏิทินรายเดือน
+  ================================================== */
+
+  const WEEKDAY_LABELS = [
+    "อา",
+    "จ",
+    "อ",
+    "พ",
+    "พฤ",
+    "ศ",
+    "ส"
+  ];
+
+
+  const MONTH_LABELS = [
+    "มกราคม",
+    "กุมภาพันธ์",
+    "มีนาคม",
+    "เมษายน",
+    "พฤษภาคม",
+    "มิถุนายน",
+    "กรกฎาคม",
+    "สิงหาคม",
+    "กันยายน",
+    "ตุลาคม",
+    "พฤศจิกายน",
+    "ธันวาคม"
+  ];
+
+
+  const today =
+    new Date();
+
+
+  let calendarCursor = {
+    year:
+      today.getFullYear(),
+    month:
+      today.getMonth()
+  };
+
+
+  function entriesByDate() {
+
+    const map = {};
+
+
+    entries.forEach(
+      function (item) {
+
+        if (!item.date) {
+          return;
+        }
+
+
+        if (!map[item.date]) {
+
+          map[item.date] = [];
+
+        }
+
+
+        map[item.date].push(
+          item
+        );
+
+      }
+    );
+
+
+    return map;
+
+  }
+
+
+  function renderCalendar() {
+
+    const year =
+      calendarCursor.year;
+
+    const month =
+      calendarCursor.month;
+
+
+    const map =
+      entriesByDate();
+
+
+    const firstOfMonth =
+      new Date(
+        year,
+        month,
+        1
+      );
+
+
+    const startOffset =
+      firstOfMonth.getDay();
+
+
+    const totalDays =
+      new Date(
+        year,
+        month + 1,
+        0
+      ).getDate();
+
+
+    const gridStart =
+      new Date(
+        year,
+        month,
+        1 - startOffset
+      );
+
+
+    const todayIso =
+      pad2Iso(
+        today.getFullYear(),
+        today.getMonth() + 1,
+        today.getDate()
+      );
+
+
+    let html = `
+
+      <div class="calendar-nav">
+
+        <div
+          class="calendar-nav-controls"
+        >
+
+          <button
+            type="button"
+            class="calendar-nav-btn"
+            id="calPrev"
+          >
+            ‹
+          </button>
+
+
+          <h3
+            class="calendar-month-label"
+          >
+            ${
+              MONTH_LABELS[
+                month
+              ]
+            } ${
+              year + 543
+            }
+          </h3>
+
+
+          <button
+            type="button"
+            class="calendar-nav-btn"
+            id="calNext"
+          >
+            ›
+          </button>
+
+
+          <button
+            type="button"
+            class="calendar-today-btn"
+            id="calToday"
+          >
+            วันนี้
+          </button>
+
+
+        </div>
+
+
+        <div
+          class="calendar-legend"
+        >
+
+          <span>
+            <i class="dot-mid"></i>
+            กลางภาค
+          </span>
+
+          <span>
+            <i class="dot-final"></i>
+            ปลายภาค
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="calendar-grid">
+
+    `;
+
+
+    WEEKDAY_LABELS.forEach(
+      function (label) {
+
+        html +=
+          '<div class="calendar-weekday">' +
+          label +
+          "</div>";
+
+      }
+    );
+
+
+    for (
+      let i = 0;
+      i < 42;
+      i++
+    ) {
+
+
+      const cellDate =
+        new Date(
+          gridStart
+        );
+
+      cellDate.setDate(
+        gridStart.getDate() +
+        i
+      );
+
+
+      const iso =
+        pad2Iso(
+          cellDate.getFullYear(),
+          cellDate.getMonth() +
+            1,
+          cellDate.getDate()
+        );
+
+
+      const isOtherMonth =
+        cellDate.getMonth() !==
+        month;
+
+
+      const isToday =
+        iso === todayIso;
+
+
+      const dayItems =
+        sortEntries(
+          map[iso] || []
+        );
+
+
+      let cellClass =
+        "calendar-day";
+
+
+      if (isOtherMonth) {
+
+        cellClass +=
+          " other-month";
+
+      }
+
+
+      if (isToday) {
+
+        cellClass +=
+          " today";
+
+      }
+
+
+      html +=
+        '<div class="' +
+        cellClass +
+        '">';
+
+
+      html +=
+        '<div class="calendar-day-num">' +
+        cellDate.getDate() +
+        "</div>";
+
+
+      const visibleItems =
+        dayItems.slice(
+          0,
+          3
+        );
+
+
+      visibleItems.forEach(
+        function (item) {
+
+          const catClass =
+            item.category ===
+              "mid" ||
+            item.category ===
+              "final"
+              ? item.category
+              : "none";
+
+
+          const titleAttr =
+            escapeHtml(
+              item.subj +
+              (
+                item.time
+                  ? " · " +
+                    item.time
+                  : ""
+              ) +
+              (
+                item.room
+                  ? " · " +
+                    item.room
+                  : ""
+              )
+            );
+
+
+          html +=
+            '<div class="calendar-chip ' +
+            catClass +
+            '" title="' +
+            titleAttr +
+            '">' +
+            escapeHtml(
+              item.subj
+            ) +
+            "</div>";
+
+        }
+      );
+
+
+      if (
+        dayItems.length >
+        visibleItems.length
+      ) {
+
+        html +=
+          '<div class="calendar-chip-more">+' +
+          (
+            dayItems.length -
+            visibleItems.length
+          ) +
+          " เพิ่มเติม</div>";
+
+      }
+
+
+      html += "</div>";
+
+    }
+
+
+    html += "</div>";
+
+
+    if (entries.length === 0) {
+
+      html +=
+        `
+
+        <div
+          class="empty"
+          style="margin-top:16px"
+        >
+
+          <span
+            class="empty-icon"
+          >
+            🗓️
+          </span>
+
+          <strong>
+            ยังไม่มีตารางสอบ
+          </strong>
+
+          เพิ่มข้อมูลสอบทางด้านซ้าย
+          เพื่อแสดงในปฏิทิน
+
+        </div>
+
+      `;
+
+    }
+
+
+    calendarView.innerHTML =
+      html;
+
+
+    document
+      .getElementById(
+        "calPrev"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          calendarCursor.month--;
+
+
+          if (
+            calendarCursor.month <
+            0
+          ) {
+
+            calendarCursor.month = 11;
+
+            calendarCursor.year--;
+
+          }
+
+
+          renderCalendar();
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "calNext"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          calendarCursor.month++;
+
+
+          if (
+            calendarCursor.month >
+            11
+          ) {
+
+            calendarCursor.month = 0;
+
+            calendarCursor.year++;
+
+          }
+
+
+          renderCalendar();
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "calToday"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          calendarCursor.year =
+            today.getFullYear();
+
+          calendarCursor.month =
+            today.getMonth();
+
+
+          renderCalendar();
+
+        }
+      );
+
+  }
+
+
+  function pad2Iso(
+    y,
+    m,
+    d
+  ) {
+
+    return (
+      y +
+      "-" +
+      String(m).padStart(
+        2,
+        "0"
+      ) +
+      "-" +
+      String(d).padStart(
+        2,
+        "0"
+      )
+    );
 
   }
 
@@ -3874,35 +4957,86 @@
      VIEW SWITCH
   ================================================== */
 
+  const VIEWS = {
+
+    report: {
+      btn: btnReport,
+      panel: reportView,
+      title: "รายงานรายวิชา",
+      desc: "ดูแต่ละวิชาและวันสอบของวิชานั้นทั้งหมด"
+    },
+
+    table: {
+      btn: btnTable,
+      panel: tableView,
+      title: "ตารางสอบ",
+      desc: "แยกตามประเภทการสอบ โดยแสดงกลางภาคก่อน"
+    },
+
+    calendar: {
+      btn: btnCalendar,
+      panel: calendarView,
+      title: "ปฏิทินสอบ",
+      desc: "ดูวันสอบทั้งหมดในรูปแบบปฏิทินรายเดือน"
+    }
+
+  };
+
+
+  function switchView(key) {
+
+    Object.keys(VIEWS).forEach(
+      function (k) {
+
+        const v = VIEWS[k];
+
+
+        if (k === key) {
+
+          v.btn.classList.add(
+            "active"
+          );
+
+          v.panel.style.display =
+            "";
+
+        } else {
+
+          v.btn.classList.remove(
+            "active"
+          );
+
+          v.panel.style.display =
+            "none";
+
+        }
+
+      }
+    );
+
+
+    viewTitle.textContent =
+      VIEWS[key].title;
+
+
+    viewDescription.textContent =
+      VIEWS[key].desc;
+
+
+    if (key === "calendar") {
+
+      renderCalendar();
+
+    }
+
+  }
+
+
   btnReport.addEventListener(
     "click",
     function () {
 
-
-      btnReport.classList.add(
-        "active"
-      );
-
-
-      btnTable.classList.remove(
-        "active"
-      );
-
-
-      reportView.style.display =
-        "";
-
-
-      tableView.style.display =
-        "none";
-
-
-      viewTitle.textContent =
-        "รายงานรายวิชา";
-
-
-      viewDescription.textContent =
-        "ดูแต่ละวิชาและวันสอบของวิชานั้นทั้งหมด";
+      switchView("report");
 
     }
   );
@@ -3912,31 +5046,17 @@
     "click",
     function () {
 
+      switchView("table");
 
-      btnTable.classList.add(
-        "active"
-      );
-
-
-      btnReport.classList.remove(
-        "active"
-      );
+    }
+  );
 
 
-      tableView.style.display =
-        "";
+  btnCalendar.addEventListener(
+    "click",
+    function () {
 
-
-      reportView.style.display =
-        "none";
-
-
-      viewTitle.textContent =
-        "ตารางสอบ";
-
-
-      viewDescription.textContent =
-        "แยกตามประเภทการสอบ โดยแสดงกลางภาคก่อน";
+      switchView("calendar");
 
     }
   );
@@ -3954,10 +5074,22 @@
 
     renderTable();
 
+
+    if (
+      calendarView.style
+        .display !== "none"
+    ) {
+
+      renderCalendar();
+
+    }
+
   }
 
 
   render();
+
+  initCloudSync();
 
 
 })();
