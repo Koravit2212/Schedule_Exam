@@ -1,0 +1,3971 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <title>ตารางสอบ</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+
+    :root {
+
+      --bg: #f3f7f5;
+
+      --card: #ffffff;
+
+      --card-soft: #f8faf9;
+
+      --text: #17332b;
+
+      --text-soft: #657970;
+
+      --border: #dce7e2;
+
+      --primary: #17332b;
+
+      --mid: #238765;
+
+      --mid-bg: #eaf7f1;
+
+      --mid-border: #b9dfcf;
+
+      --final: #3b6795;
+
+      --final-bg: #edf4fb;
+
+      --final-border: #c9d9eb;
+
+      --danger: #c45126;
+
+      --danger-bg: #fff1eb;
+
+      --warning: #a66a13;
+
+      --warning-bg: #fff7e8;
+
+      --radius: 13px;
+
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html,
+    body {
+
+      margin: 0;
+
+      padding: 0;
+
+      background: var(--bg);
+
+      color: var(--text);
+
+      font-family: "Noto Sans Thai", sans-serif;
+
+      line-height: 1.55;
+
+    }
+
+
+    body {
+
+      padding-top: env(safe-area-inset-top, 0px);
+
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+
+    }
+
+
+    h1,
+    h2,
+    h3,
+    h4 {
+
+      font-family: "Noto Serif Thai", serif;
+
+    }
+
+
+    button,
+    input,
+    textarea,
+    select {
+
+      font-family: inherit;
+
+    }
+
+
+    button {
+
+      cursor: pointer;
+
+    }
+
+
+    /* =========================
+       CONTAINER
+    ========================= */
+
+    .container {
+
+      width: min(1180px, calc(100% - 32px));
+
+      margin: 0 auto;
+
+      padding: 30px 0 60px;
+
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .header {
+
+      margin-bottom: 24px;
+
+    }
+
+
+    .header-main {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+
+      gap: 20px;
+
+      padding-bottom: 17px;
+
+      border-bottom: 2px solid var(--text);
+
+    }
+
+
+    .header h1 {
+
+      margin: 0;
+
+      font-size: clamp(1.8rem, 4vw, 2.45rem);
+
+    }
+
+
+    .header p {
+
+      margin: 5px 0 0;
+
+      color: var(--text-soft);
+
+      font-size: .88rem;
+
+    }
+
+
+    /* =========================
+       SUMMARY
+    ========================= */
+
+    .summary {
+
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 12px;
+
+      margin-bottom: 24px;
+
+    }
+
+
+    .summary-card {
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius);
+
+      padding: 15px 18px;
+
+    }
+
+
+    .summary-card.mid {
+
+      border-left: 4px solid var(--mid);
+
+    }
+
+
+    .summary-card.final {
+
+      border-left: 4px solid var(--final);
+
+    }
+
+
+    .summary-label {
+
+      color: var(--text-soft);
+
+      font-size: .76rem;
+
+    }
+
+
+    .summary-number {
+
+      margin-top: 2px;
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: 1.45rem;
+
+      font-weight: 700;
+
+    }
+
+
+    /* =========================
+       MAIN LAYOUT
+    ========================= */
+
+    .layout {
+
+      display: grid;
+
+      grid-template-columns: 330px minmax(0, 1fr);
+
+      gap: 24px;
+
+      align-items: start;
+
+    }
+
+
+    .left-column {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 18px;
+
+    }
+
+
+    .panel {
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius);
+
+      padding: 20px;
+
+    }
+
+
+    .panel-title {
+
+      margin: 0 0 17px;
+
+      padding-bottom: 12px;
+
+      border-bottom: 1px solid var(--border);
+
+      font-size: 1.05rem;
+
+    }
+
+
+    /* =========================
+       FORM
+    ========================= */
+
+    label {
+
+      display: block;
+
+      margin: 13px 0 6px;
+
+      color: var(--text-soft);
+
+      font-size: .77rem;
+
+      font-weight: 600;
+
+    }
+
+
+    label:first-of-type {
+
+      margin-top: 0;
+
+    }
+
+
+    input,
+    textarea,
+    select {
+
+      width: 100%;
+
+      border: 1px solid var(--border);
+
+      border-radius: 8px;
+
+      background: var(--card-soft);
+
+      color: var(--text);
+
+      padding: 10px 11px;
+
+      outline: none;
+
+      font-size: .88rem;
+
+      transition: .15s ease;
+
+    }
+
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+
+      border-color: var(--mid);
+
+      background: #fff;
+
+      box-shadow: 0 0 0 3px rgba(35, 135, 101, .08);
+
+    }
+
+
+    textarea {
+
+      min-height: 80px;
+
+      resize: vertical;
+
+    }
+
+
+    .form-row {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+
+    }
+
+
+    .form-buttons {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 8px;
+
+      margin-top: 18px;
+
+    }
+
+
+    .btn {
+
+      border-radius: 8px;
+
+      padding: 10px 14px;
+
+      font-size: .86rem;
+
+      font-weight: 600;
+
+    }
+
+
+    .btn-primary {
+
+      background: var(--primary);
+
+      color: white;
+
+      border: 1px solid var(--primary);
+
+    }
+
+
+    .btn-primary:hover {
+
+      opacity: .88;
+
+    }
+
+
+    .btn-secondary {
+
+      background: var(--card-soft);
+
+      color: var(--text);
+
+      border: 1px solid var(--border);
+
+    }
+
+
+    .btn-danger {
+
+      background: var(--danger-bg);
+
+      color: var(--danger);
+
+      border: 1px solid var(--danger);
+
+    }
+
+
+    .btn-danger:hover {
+
+      background: var(--danger);
+
+      color: white;
+
+    }
+
+
+    .btn-danger.confirming {
+
+      background: var(--danger);
+
+      color: white;
+
+      animation: pulse-danger 1s ease-in-out infinite;
+
+    }
+
+
+    @keyframes pulse-danger {
+
+      0%, 100% { opacity: 1; }
+      50% { opacity: .7; }
+
+    }
+
+
+    .hint {
+
+      margin-top: 9px;
+
+      color: var(--text-soft);
+
+      font-size: .71rem;
+
+    }
+
+
+    /* =========================
+       BULK
+    ========================= */
+
+    .bulk-info {
+
+      padding: 10px 12px;
+
+      border: 1px dashed var(--border);
+
+      border-radius: 8px;
+
+      background: var(--card-soft);
+
+      color: var(--text-soft);
+
+      font-size: .73rem;
+
+      margin-bottom: 12px;
+
+    }
+
+
+    /* =========================
+       VIEW SWITCH
+    ========================= */
+
+    .view-header {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 15px;
+
+      margin-bottom: 15px;
+
+    }
+
+
+    .view-title {
+
+      margin: 0;
+
+      font-size: 1.15rem;
+
+    }
+
+
+    .view-description {
+
+      margin: 2px 0 0;
+
+      color: var(--text-soft);
+
+      font-size: .74rem;
+
+    }
+
+
+    .view-switch {
+
+      display: flex;
+
+      gap: 6px;
+
+      flex-shrink: 0;
+
+    }
+
+
+    .view-btn {
+
+      border: 1px solid var(--border);
+
+      background: var(--card);
+
+      color: var(--text-soft);
+
+      border-radius: 20px;
+
+      padding: 7px 13px;
+
+      font-size: .75rem;
+
+      font-weight: 600;
+
+    }
+
+
+    .view-btn.active {
+
+      background: var(--primary);
+
+      color: white;
+
+      border-color: var(--primary);
+
+    }
+
+
+    /* =================================================
+       REPORT VIEW
+       วิชาเป็นหลัก
+    ================================================= */
+
+    .report-list {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+    }
+
+
+    .subject-card {
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius);
+
+      overflow: hidden;
+
+    }
+
+
+    .subject-header {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-start;
+
+      gap: 15px;
+
+      padding: 16px 18px;
+
+      background: #D9EDE6;
+
+      border-bottom: 1px solid var(--border);
+
+    }
+
+
+    .subject-title-area {
+
+      min-width: 0;
+
+    }
+
+
+    .subject-title {
+
+      margin: 0;
+
+      font-size: 1.02rem;
+
+      font-weight: 700;
+
+      overflow-wrap: anywhere;
+
+    }
+
+
+    .subject-subtitle {
+
+      margin-top: 3px;
+
+      color: var(--text-soft);
+
+      font-size: .7rem;
+
+    }
+
+
+    .subject-countdown {
+
+      flex-shrink: 0;
+
+      padding: 5px 10px;
+
+      border-radius: 20px;
+
+      background: var(--card-soft);
+
+      color: var(--text-soft);
+
+      font-size: .69rem;
+
+      font-weight: 600;
+
+    }
+
+
+    .subject-countdown.soon {
+
+      background: var(--danger-bg);
+
+      color: var(--danger);
+
+    }
+
+
+    .exam-list {
+
+      padding: 7px 18px 10px;
+
+    }
+
+
+    .exam-line {
+
+      display: grid;
+
+      grid-template-columns: 105px 1fr auto;
+
+      align-items: center;
+
+      gap: 14px;
+
+      padding: 13px 0;
+
+      border-bottom: 1px dashed var(--border);
+
+    }
+
+
+    .exam-line:last-child {
+
+      border-bottom: none;
+
+    }
+
+
+    .exam-type {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      font-size: .77rem;
+
+      font-weight: 700;
+
+    }
+
+
+    .exam-type-dot {
+
+      width: 8px;
+
+      height: 8px;
+
+      border-radius: 50%;
+
+      display: inline-block;
+
+    }
+
+
+    .exam-type.mid {
+
+      color: var(--mid);
+
+    }
+
+
+    .exam-type.mid .exam-type-dot {
+
+      background: var(--mid);
+
+    }
+
+
+    .exam-type.final {
+
+      color: var(--final);
+
+    }
+
+
+    .exam-type.final .exam-type-dot {
+
+      background: var(--final);
+
+    }
+
+
+    .exam-type.none {
+
+      color: var(--text-soft);
+
+    }
+
+
+    .exam-type.none .exam-type-dot {
+
+      background: var(--text-soft);
+
+    }
+
+
+    .exam-date {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 1px;
+
+    }
+
+
+    .exam-date-main {
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: .84rem;
+
+      font-weight: 700;
+
+    }
+
+
+    .exam-date-full {
+
+      color: var(--text-soft);
+
+      font-size: .69rem;
+
+    }
+
+
+    .exam-info {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 5px 14px;
+
+      color: var(--text-soft);
+
+      font-size: .73rem;
+
+    }
+
+
+    .exam-info span {
+
+      white-space: nowrap;
+
+    }
+
+
+    .line-actions {
+
+      display: flex;
+
+      gap: 5px;
+
+    }
+
+
+    .small-btn {
+
+      border: 1px solid var(--border);
+
+      background: white;
+
+      color: var(--text-soft);
+
+      border-radius: 18px;
+
+      padding: 5px 10px;
+
+      font-size: .68rem;
+
+    }
+
+
+    .small-btn.edit:hover {
+
+      color: var(--mid);
+
+      border-color: var(--mid);
+
+    }
+
+
+    .small-btn.delete:hover {
+
+      color: var(--danger);
+
+      border-color: var(--danger);
+
+    }
+
+
+    .export-img-btn {
+
+      border: 1px solid var(--border);
+
+      background: white;
+
+      color: var(--text-soft);
+
+      border-radius: 18px;
+
+      padding: 6px 12px;
+
+      font-size: .72rem;
+
+      font-weight: 600;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+      white-space: nowrap;
+
+    }
+
+
+    .export-img-btn:hover {
+
+      color: var(--primary);
+
+      border-color: var(--primary);
+
+    }
+
+
+    .export-img-btn:disabled {
+
+      opacity: .55;
+
+      cursor: default;
+
+    }
+
+
+    .table-section-header-right {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      flex-shrink: 0;
+
+    }
+
+
+    /* hide interactive bits while a section is being captured as an image */
+
+    .table-section.exporting .export-img-btn,
+    .table-section.exporting th:last-child,
+    .table-section.exporting td:last-child {
+
+      display: none;
+
+    }
+
+
+    /* =========================
+       TABLE VIEW
+       กลางภาคเป็นหลัก
+    ========================= */
+
+    .table-section {
+
+      margin-bottom: 18px;
+
+      border-radius: var(--radius);
+
+      overflow: hidden;
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+    }
+
+
+    .table-section-header {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 15px;
+
+      padding: 15px 18px;
+
+    }
+
+
+    .table-section-header-left {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+    }
+
+
+    .section-icon {
+
+      width: 35px;
+
+      height: 35px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 9px;
+
+      background: white;
+
+    }
+
+
+    .table-section-title {
+
+      margin: 0;
+
+      font-size: 1.08rem;
+
+    }
+
+
+    .table-section-count {
+
+      padding: 4px 10px;
+
+      background: white;
+
+      border-radius: 20px;
+
+      font-size: .7rem;
+
+      font-weight: 700;
+
+    }
+
+
+    .table-section.mid {
+
+      border-color: var(--mid-border);
+
+    }
+
+
+    .table-section.mid .table-section-header {
+
+      background: var(--mid-bg);
+
+      border-bottom: 1px solid var(--mid-border);
+
+    }
+
+
+    .table-section.mid .section-icon {
+
+      color: var(--mid);
+
+    }
+
+
+    .table-section.mid .table-section-title {
+
+      color: var(--mid);
+
+    }
+
+
+    .table-section.mid .table-section-count {
+
+      color: var(--mid);
+
+    }
+
+
+    .table-section.final {
+
+      border-color: var(--final-border);
+
+    }
+
+
+    .table-section.final .table-section-header {
+
+      background: var(--final-bg);
+
+      border-bottom: 1px solid var(--final-border);
+
+    }
+
+
+    .table-section.final .section-icon {
+
+      color: var(--final);
+
+    }
+
+
+    .table-section.final .table-section-title {
+
+      color: var(--final);
+
+    }
+
+
+    .table-section.final .table-section-count {
+
+      color: var(--final);
+
+    }
+
+
+    .table-section.none {
+
+      border-color: var(--border);
+
+    }
+
+
+    .table-section.none .table-section-header {
+
+      background: var(--card-soft);
+
+      border-bottom: 1px solid var(--border);
+
+    }
+
+
+    .table-scroll {
+
+      overflow-x: auto;
+
+    }
+
+
+    table {
+
+      width: 100%;
+
+      border-collapse: collapse;
+
+      font-size: .78rem;
+
+    }
+
+
+    th,
+    td {
+
+      padding: 10px 12px;
+
+      border-bottom: 1px solid var(--border);
+
+      text-align: left;
+
+      vertical-align: middle;
+
+    }
+
+
+    th {
+
+      color: var(--text-soft);
+
+      background: #fbfcfb;
+
+      font-size: .7rem;
+
+      font-weight: 600;
+
+      white-space: nowrap;
+
+    }
+
+
+    tbody tr:last-child td {
+
+      border-bottom: none;
+
+    }
+
+
+    tbody tr:hover {
+
+      background: #fbfcfb;
+
+    }
+
+
+    .table-date {
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-weight: 700;
+
+      white-space: nowrap;
+
+    }
+
+
+    .table-time {
+
+      font-family: "JetBrains Mono", monospace;
+
+      white-space: nowrap;
+
+    }
+
+
+    .table-subject {
+
+      font-weight: 600;
+
+      min-width: 170px;
+
+    }
+
+
+    .table-note {
+
+      min-width: 180px;
+
+      color: var(--text-soft);
+
+    }
+
+
+    /* =========================
+       EMPTY
+    ========================= */
+
+    .empty {
+
+      padding: 50px 20px;
+
+      background: var(--card);
+
+      border: 1px dashed var(--border);
+
+      border-radius: var(--radius);
+
+      text-align: center;
+
+      color: var(--text-soft);
+
+    }
+
+
+    .empty-icon {
+
+      display: block;
+
+      font-size: 2.3rem;
+
+      margin-bottom: 9px;
+
+    }
+
+
+    .empty strong {
+
+      display: block;
+
+      margin-bottom: 4px;
+
+      color: var(--text);
+
+    }
+
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 850px) {
+
+      .layout {
+
+        grid-template-columns: 1fr;
+
+      }
+
+    }
+
+
+    @media (max-width: 650px) {
+
+      .container {
+
+        width: min(100% - 20px, 1180px);
+
+        padding-top: 20px;
+
+      }
+
+
+      .summary {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .view-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+      }
+
+
+      .view-switch {
+
+        width: 100%;
+
+      }
+
+
+      .view-btn {
+
+        flex: 1;
+
+      }
+
+
+      .exam-line {
+
+        grid-template-columns: 1fr;
+
+        gap: 7px;
+
+      }
+
+
+      .line-actions {
+
+        justify-content: flex-start;
+
+      }
+
+
+      .subject-header {
+
+        flex-direction: column;
+
+      }
+
+
+      .form-row {
+
+        grid-template-columns: 1fr;
+
+      }
+
+    }
+
+
+    @media (max-width: 430px) {
+
+      .form-buttons {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      .exam-info {
+
+        flex-direction: column;
+
+        gap: 3px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <header class="header">
+
+    <div class="header-main">
+
+      <div>
+
+        <h1>📚 ตารางสอบ</h1>
+
+        <p>
+          ดูรายวิชาและวันสอบทั้งหมดได้อย่างเป็นระเบียบ
+        </p>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       SUMMARY
+  ========================= -->
+
+  <section class="summary">
+
+    <div class="summary-card">
+
+      <div class="summary-label">
+        รายการสอบทั้งหมด
+      </div>
+
+      <div
+        class="summary-number"
+        id="totalCount"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="summary-card mid">
+
+      <div class="summary-label">
+        สอบกลางภาค
+      </div>
+
+      <div
+        class="summary-number"
+        id="midCount"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="summary-card final">
+
+      <div class="summary-label">
+        สอบปลายภาค
+      </div>
+
+      <div
+        class="summary-number"
+        id="finalCount"
+      >
+        0
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <div class="layout">
+
+
+    <!-- ==================================================
+         LEFT COLUMN
+    ================================================== -->
+
+    <div class="left-column">
+
+
+      <!-- ADD SUBJECT -->
+
+      <section class="panel">
+
+        <h2 class="panel-title">
+          ➕ เพิ่มข้อมูลสอบ
+        </h2>
+
+
+        <form id="examForm">
+
+
+          <label for="subj">
+            ชื่อวิชา
+          </label>
+
+          <input
+            id="subj"
+            type="text"
+            placeholder="เช่น ระบบฐานข้อมูล"
+            required
+          >
+
+
+          <label for="category">
+            ประเภทการสอบ
+          </label>
+
+          <select id="category">
+
+            <option value="">
+              ไม่ระบุ
+            </option>
+
+            <option value="mid">
+              สอบกลางภาค
+            </option>
+
+            <option value="final">
+              สอบปลายภาค
+            </option>
+
+          </select>
+
+
+          <div class="form-row">
+
+
+            <div>
+
+              <label for="date">
+                วันที่สอบ
+              </label>
+
+              <input
+                id="date"
+                type="date"
+                required
+              >
+
+            </div>
+
+
+            <div>
+
+              <label for="time">
+                เวลา
+              </label>
+
+              <input
+                id="time"
+                type="time"
+              >
+
+            </div>
+
+
+          </div>
+
+
+          <label for="room">
+            ห้อง / สถานที่
+          </label>
+
+          <input
+            id="room"
+            type="text"
+            placeholder="เช่น SC-301"
+          >
+
+
+          <label for="note">
+            รายละเอียดเพิ่มเติม
+          </label>
+
+          <textarea
+            id="note"
+            placeholder="เช่น นำเครื่องคิดเลข, บทที่ 1-5"
+          ></textarea>
+
+
+          <div class="form-buttons">
+
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+              id="submitBtn"
+            >
+              เพิ่มลงตาราง
+            </button>
+
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="cancelEdit"
+              style="display:none"
+            >
+              ยกเลิก
+            </button>
+
+
+          </div>
+
+
+        </form>
+
+
+        <div class="hint">
+          💾 ข้อมูลจะถูกบันทึกไว้ในเบราว์เซอร์นี้
+        </div>
+
+
+      </section>
+
+
+      <!-- BULK IMPORT -->
+
+      <section class="panel">
+
+        <h2 class="panel-title">
+          📋 นำเข้าจากระบบทะเบียน
+        </h2>
+
+
+        <div class="bulk-info">
+
+          คัดลอกตารางสอบจากระบบทะเบียน
+          แล้วนำมาวางด้านล่าง ระบบจะแปลงข้อมูลให้อัตโนมัติ
+
+        </div>
+
+
+        <label for="bulkText">
+          ข้อมูลตารางสอบ
+        </label>
+
+
+        <textarea
+          id="bulkText"
+          rows="7"
+          placeholder="วางข้อความตารางสอบที่คัดลอกมาทั้งหมด"
+        ></textarea>
+
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="bulkParseBtn"
+          style="width:100%;margin-top:12px"
+        >
+          แปลงเป็นตาราง
+        </button>
+
+
+        <div
+          id="bulkResult"
+          class="hint"
+        ></div>
+
+
+      </section>
+
+
+      <!-- CLEAR ALL -->
+
+      <section class="panel">
+
+        <h2 class="panel-title">
+          ⚠️ ล้างข้อมูล
+        </h2>
+
+
+        <div class="bulk-info">
+          ลบรายการสอบทั้งหมดออกจากตารางถาวร
+          การกระทำนี้ไม่สามารถย้อนกลับได้
+        </div>
+
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          id="clearAllBtn"
+          style="width:100%"
+        >
+          🗑️ ล้างข้อมูลทั้งหมด
+        </button>
+
+
+        <div
+          id="clearAllResult"
+          class="hint"
+        ></div>
+
+
+      </section>
+
+
+    </div>
+
+
+    <!-- ==================================================
+         RIGHT COLUMN
+    ================================================== -->
+
+    <section>
+
+
+      <!-- VIEW HEADER -->
+
+      <div class="view-header">
+
+
+        <div>
+
+          <h2
+            class="view-title"
+            id="viewTitle"
+          >
+            รายงานรายวิชา
+          </h2>
+
+          <p
+            class="view-description"
+            id="viewDescription"
+          >
+            ดูแต่ละวิชาและวันสอบของวิชานั้นทั้งหมด
+          </p>
+
+        </div>
+
+
+        <div class="view-switch">
+
+
+          <button
+            id="viewReport"
+            class="view-btn active"
+          >
+            📚 รายงาน
+          </button>
+
+
+          <button
+            id="viewTable"
+            class="view-btn"
+          >
+            📅 ตารางสอบ
+          </button>
+
+
+        </div>
+
+
+      </div>
+
+
+      <!-- REPORT -->
+
+      <div id="reportView"></div>
+
+
+      <!-- TABLE -->
+
+      <div
+        id="tableView"
+        style="display:none"
+      ></div>
+
+
+    </section>
+
+
+  </div>
+
+</div>
+
+
+<script>
+
+(function () {
+
+
+  const STORE_KEY =
+    "exam-schedule-entries-v3";
+
+
+  const form =
+    document.getElementById("examForm");
+
+
+  const reportView =
+    document.getElementById("reportView");
+
+
+  const tableView =
+    document.getElementById("tableView");
+
+
+  const btnReport =
+    document.getElementById("viewReport");
+
+
+  const btnTable =
+    document.getElementById("viewTable");
+
+
+  const viewTitle =
+    document.getElementById("viewTitle");
+
+
+  const viewDescription =
+    document.getElementById("viewDescription");
+
+
+  const submitBtn =
+    document.getElementById("submitBtn");
+
+
+  const cancelBtn =
+    document.getElementById("cancelEdit");
+
+
+  const clearAllBtn =
+    document.getElementById("clearAllBtn");
+
+
+  let entries = load();
+
+  let editingId = null;
+
+
+  /* ==================================================
+     STORAGE
+  ================================================== */
+
+  function load() {
+
+    try {
+
+      const raw =
+        localStorage.getItem(STORE_KEY);
+
+      return raw
+        ? JSON.parse(raw)
+        : [];
+
+    } catch (error) {
+
+      return [];
+
+    }
+
+  }
+
+
+  function save() {
+
+    try {
+
+      localStorage.setItem(
+        STORE_KEY,
+        JSON.stringify(entries)
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
+  }
+
+
+  /* ==================================================
+     ESCAPE
+  ================================================== */
+
+  function escapeHtml(value) {
+
+    return String(value || "")
+      .replace(
+        /[&<>"']/g,
+        function (char) {
+
+          return {
+
+            "&": "&amp;",
+
+            "<": "&lt;",
+
+            ">": "&gt;",
+
+            '"': "&quot;",
+
+            "'": "&#39;"
+
+          }[char];
+
+        }
+      );
+
+  }
+
+
+  /* ==================================================
+     DATE
+  ================================================== */
+
+  function getDateObject(iso) {
+
+    return new Date(
+      iso + "T00:00:00"
+    );
+
+  }
+
+
+  function formatShortDate(iso) {
+
+    if (!iso) return "-";
+
+
+    return getDateObject(iso)
+      .toLocaleDateString(
+        "th-TH",
+        {
+          day: "numeric",
+          month: "short",
+          year: "2-digit"
+        }
+      );
+
+  }
+
+
+  function formatFullDate(iso) {
+
+    if (!iso) return "-";
+
+
+    return getDateObject(iso)
+      .toLocaleDateString(
+        "th-TH",
+        {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }
+      );
+
+  }
+
+
+  function daysUntil(iso) {
+
+    const today = new Date();
+
+    today.setHours(
+      0,
+      0,
+      0,
+      0
+    );
+
+
+    const date =
+      getDateObject(iso);
+
+
+    return Math.round(
+      (date - today) /
+      86400000
+    );
+
+  }
+
+
+  function relativeDate(number) {
+
+    if (number === 0) {
+      return "วันนี้";
+    }
+
+
+    if (number === 1) {
+      return "พรุ่งนี้";
+    }
+
+
+    if (number > 1) {
+      return "อีก " + number + " วัน";
+    }
+
+
+    return (
+      "ผ่านมาแล้ว " +
+      Math.abs(number) +
+      " วัน"
+    );
+
+  }
+
+
+  /* ==================================================
+     CATEGORY
+  ================================================== */
+
+  function categoryLabel(category) {
+
+    if (category === "mid") {
+      return "กลางภาค";
+    }
+
+
+    if (category === "final") {
+      return "ปลายภาค";
+    }
+
+
+    return "ไม่ระบุ";
+
+  }
+
+
+  function categoryClass(category) {
+
+    if (category === "mid") {
+      return "mid";
+    }
+
+
+    if (category === "final") {
+      return "final";
+    }
+
+
+    return "none";
+
+  }
+
+
+  /* ==================================================
+     SORT
+  ================================================== */
+
+  function sortEntries(list) {
+
+    return [...list].sort(
+      function (a, b) {
+
+        const dateCompare =
+          a.date.localeCompare(
+            b.date
+          );
+
+
+        if (dateCompare !== 0) {
+          return dateCompare;
+        }
+
+
+        return (a.time || "")
+          .localeCompare(
+            b.time || ""
+          );
+
+      }
+    );
+
+  }
+
+
+  /* ==================================================
+     GROUP BY SUBJECT
+     วิชาเป็นหลัก
+  ================================================== */
+
+  function groupBySubject() {
+
+    const map = new Map();
+
+
+    entries.forEach(
+      function (item) {
+
+        const subject =
+          item.subj.trim();
+
+
+        if (!map.has(subject)) {
+
+          map.set(
+            subject,
+            []
+          );
+
+        }
+
+
+        map.get(subject)
+          .push(item);
+
+      }
+    );
+
+
+    const groups = [];
+
+
+    map.forEach(
+      function (items, subject) {
+
+        const sorted =
+          sortEntries(items);
+
+
+        groups.push({
+
+          subject,
+
+          items: sorted,
+
+          firstDate:
+            sorted[0]?.date || ""
+
+        });
+
+      }
+    );
+
+
+    groups.sort(
+      function (a, b) {
+
+        return a.firstDate
+          .localeCompare(
+            b.firstDate
+          );
+
+      }
+    );
+
+
+    return groups;
+
+  }
+
+
+  /* ==================================================
+     SUMMARY
+  ================================================== */
+
+  function renderSummary() {
+
+    const total =
+      entries.length;
+
+
+    const mid =
+      entries.filter(
+        e => e.category === "mid"
+      ).length;
+
+
+    const final =
+      entries.filter(
+        e => e.category === "final"
+      ).length;
+
+
+    document.getElementById(
+      "totalCount"
+    ).textContent = total;
+
+
+    document.getElementById(
+      "midCount"
+    ).textContent = mid;
+
+
+    document.getElementById(
+      "finalCount"
+    ).textContent = final;
+
+  }
+
+
+  /* ==================================================
+     REPORT
+     วิชา -> วันสอบ
+  ================================================== */
+
+  function renderReport() {
+
+    if (entries.length === 0) {
+
+      reportView.innerHTML = `
+
+        <div class="empty">
+
+          <span class="empty-icon">
+            📚
+          </span>
+
+          <strong>
+            ยังไม่มีรายวิชา
+          </strong>
+
+          เพิ่มข้อมูลสอบทางด้านซ้าย
+          เพื่อเริ่มสร้างรายงาน
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    const groups =
+      groupBySubject();
+
+
+    let html =
+      '<div class="report-list">';
+
+
+    groups.forEach(
+      function (group) {
+
+
+        const first =
+          group.items[0];
+
+
+        const n =
+          daysUntil(first.date);
+
+
+        const soon =
+          n >= 0 && n <= 3;
+
+
+        html += `
+
+          <article class="subject-card">
+
+
+            <div class="subject-header">
+
+              <div class="subject-title-area">
+
+                <h3 class="subject-title">
+
+                  ${escapeHtml(
+                    group.subject
+                  )}
+
+                </h3>
+
+
+                <div class="subject-subtitle">
+
+                  ${group.items.length}
+                  รายการสอบ
+
+                </div>
+
+              </div>
+
+
+              <span
+                class="subject-countdown
+                ${soon ? "soon" : ""}"
+              >
+
+                ${relativeDate(n)}
+
+              </span>
+
+            </div>
+
+
+            <div class="exam-list">
+
+        `;
+
+
+        group.items.forEach(
+          function (item) {
+
+            const cls =
+              categoryClass(
+                item.category
+              );
+
+
+            html += `
+
+              <div class="exam-line">
+
+
+                <div
+                  class="exam-type ${cls}"
+                >
+
+                  <span
+                    class="exam-type-dot"
+                  ></span>
+
+                  ${categoryLabel(
+                    item.category
+                  )}
+
+                </div>
+
+
+                <div class="exam-date">
+
+                  <span
+                    class="exam-date-main"
+                  >
+                    ${formatShortDate(
+                      item.date
+                    )}
+                    ${
+                      item.time
+                        ? " · " +
+                          escapeHtml(
+                            item.time
+                          )
+                        : ""
+                    }
+                  </span>
+
+
+                  <span
+                    class="exam-date-full"
+                  >
+                    ${formatFullDate(
+                      item.date
+                    )}
+                  </span>
+
+
+                  <div class="exam-info">
+
+                    ${
+                      item.room
+                        ? `
+                          <span>
+                            📍
+                            ${escapeHtml(
+                              item.room
+                            )}
+                          </span>
+                        `
+                        : ""
+                    }
+
+
+                    ${
+                      item.note
+                        ? `
+                          <span>
+                            📝
+                            ${escapeHtml(
+                              item.note
+                            )}
+                          </span>
+                        `
+                        : ""
+                    }
+
+                  </div>
+
+                </div>
+
+
+                <div class="line-actions">
+
+                  <button
+                    class="small-btn edit"
+                    data-id="${item.id}"
+                  >
+                    แก้ไข
+                  </button>
+
+
+                  <button
+                    class="small-btn delete"
+                    data-id="${item.id}"
+                  >
+                    ลบ
+                  </button>
+
+                </div>
+
+
+              </div>
+
+            `;
+
+          }
+        );
+
+
+        html += `
+
+            </div>
+
+          </article>
+
+        `;
+
+      }
+    );
+
+
+    html += "</div>";
+
+
+    reportView.innerHTML =
+      html;
+
+
+    bindActions(reportView);
+
+  }
+
+
+  /* ==================================================
+     TABLE SECTION
+     กลางภาคเป็นหลัก
+  ================================================== */
+
+  function renderTableSection(
+    category,
+    title,
+    icon,
+    className
+  ) {
+
+
+    const items =
+      sortEntries(
+        entries.filter(
+          e =>
+            (e.category || "") ===
+            category
+        )
+      );
+
+
+    if (items.length === 0) {
+      return "";
+    }
+
+
+    let html = `
+
+      <section
+        class="table-section ${className}"
+      >
+
+
+        <div
+          class="table-section-header"
+        >
+
+
+          <div
+            class="table-section-header-left"
+          >
+
+            <div class="section-icon">
+              ${icon}
+            </div>
+
+
+            <h2
+              class="table-section-title"
+            >
+              ${title}
+            </h2>
+
+          </div>
+
+
+          <div class="table-section-header-right">
+
+            <span
+              class="table-section-count"
+            >
+              ${items.length} รายการ
+            </span>
+
+
+            <button
+              type="button"
+              class="export-img-btn"
+              data-export-section="${className}"
+              data-export-label="${title}"
+            >
+              🖼️ ส่งออกเป็นรูปภาพ
+            </button>
+
+
+          </div>
+
+
+        </div>
+
+
+        <div class="table-scroll">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  วันที่
+                </th>
+
+                <th>
+                  เวลา
+                </th>
+
+                <th>
+                  วิชา
+                </th>
+
+                <th>
+                  ห้อง
+                </th>
+
+                <th>
+                  รายละเอียด
+                </th>
+
+                <th>
+                  นับถอยหลัง
+                </th>
+
+                <th>
+                  จัดการ
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+    `;
+
+
+    items.forEach(
+      function (item) {
+
+        const n =
+          daysUntil(item.date);
+
+
+        html += `
+
+          <tr>
+
+
+            <td class="table-date">
+
+              ${formatShortDate(
+                item.date
+              )}
+
+            </td>
+
+
+            <td class="table-time">
+
+              ${
+                escapeHtml(
+                  item.time || "—"
+                )
+              }
+
+            </td>
+
+
+            <td class="table-subject">
+
+              ${escapeHtml(
+                item.subj
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${escapeHtml(
+                item.room || "—"
+              )}
+
+            </td>
+
+
+            <td class="table-note">
+
+              ${escapeHtml(
+                item.note || "—"
+              )}
+
+            </td>
+
+
+            <td>
+
+              ${relativeDate(n)}
+
+            </td>
+
+
+            <td>
+
+              <div class="line-actions">
+
+                <button
+                  class="small-btn edit"
+                  data-id="${item.id}"
+                >
+                  แก้ไข
+                </button>
+
+
+                <button
+                  class="small-btn delete"
+                  data-id="${item.id}"
+                >
+                  ลบ
+                </button>
+
+              </div>
+
+            </td>
+
+
+          </tr>
+
+        `;
+
+      }
+    );
+
+
+    html += `
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+    `;
+
+
+    return html;
+
+  }
+
+
+  /* ==================================================
+     TABLE VIEW
+     เรียงกลางภาค -> ปลายภาค -> ไม่ระบุ
+  ================================================== */
+
+  function renderTable() {
+
+    if (entries.length === 0) {
+
+      tableView.innerHTML = `
+
+        <div class="empty">
+
+          <span class="empty-icon">
+            📅
+          </span>
+
+          <strong>
+            ยังไม่มีตารางสอบ
+          </strong>
+
+          เพิ่มข้อมูลสอบก่อน
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    let html = "";
+
+
+    // 1. กลางภาค — มาก่อน
+
+    html += renderTableSection(
+      "mid",
+      "สอบกลางภาค",
+      "📝",
+      "mid"
+    );
+
+
+    // 2. ปลายภาค
+
+    html += renderTableSection(
+      "final",
+      "สอบปลายภาค",
+      "🎓",
+      "final"
+    );
+
+
+    // 3. ไม่ระบุ
+
+    html += renderTableSection(
+      "",
+      "ไม่ระบุประเภท",
+      "📌",
+      "none"
+    );
+
+
+    tableView.innerHTML =
+      html;
+
+
+    bindActions(tableView);
+
+  }
+
+
+  /* ==================================================
+     ACTIONS
+  ================================================== */
+
+  /* ==================================================
+     EXPORT SECTION AS IMAGE
+     แยกกลางภาค / ปลายภาค คนละไฟล์
+  ================================================== */
+
+  function exportTableSection(sectionEl, label, button) {
+
+    if (!sectionEl) {
+      return;
+    }
+
+
+    if (typeof html2canvas === "undefined") {
+
+      alert(
+        "โหลดไลบรารีสำหรับส่งออกรูปภาพไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ตแล้วลองใหม่"
+      );
+
+      return;
+
+    }
+
+
+    const originalText =
+      button
+        ? button.textContent
+        : "";
+
+
+    if (button) {
+
+      button.disabled = true;
+
+      button.textContent =
+        "⏳ กำลังสร้างรูปภาพ...";
+
+    }
+
+
+    sectionEl.classList.add(
+      "exporting"
+    );
+
+
+    html2canvas(
+      sectionEl,
+      {
+        backgroundColor:
+          "#ffffff",
+        scale: 2,
+        useCORS: true
+      }
+    )
+      .then(
+        function (canvas) {
+
+
+          const today =
+            new Date();
+
+
+          const stamp =
+            today.getFullYear() +
+            pad2(
+              today.getMonth() + 1
+            ) +
+            pad2(
+              today.getDate()
+            );
+
+
+          const link =
+            document.createElement(
+              "a"
+            );
+
+
+          link.download =
+            "ตารางสอบ-" +
+            label +
+            "-" +
+            stamp +
+            ".png";
+
+
+          link.href =
+            canvas.toDataURL(
+              "image/png"
+            );
+
+
+          document.body.appendChild(
+            link
+          );
+
+          link.click();
+
+          link.remove();
+
+        }
+      )
+      .catch(
+        function (err) {
+
+          console.error(
+            err
+          );
+
+          alert(
+            "เกิดข้อผิดพลาดในการส่งออกรูปภาพ กรุณาลองใหม่อีกครั้ง"
+          );
+
+        }
+      )
+      .finally(
+        function () {
+
+          sectionEl.classList.remove(
+            "exporting"
+          );
+
+
+          if (button) {
+
+            button.disabled = false;
+
+            button.textContent =
+              originalText;
+
+          }
+
+        }
+      );
+
+  }
+
+
+  function bindActions(root) {
+
+
+    root
+      .querySelectorAll(
+        "[data-export-section]"
+      )
+      .forEach(
+        function (button) {
+
+
+          button.addEventListener(
+            "click",
+            function () {
+
+
+              const sectionEl =
+                button.closest(
+                  ".table-section"
+                );
+
+
+              exportTableSection(
+                sectionEl,
+                button.dataset
+                  .exportLabel,
+                button
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    root
+      .querySelectorAll(".delete")
+      .forEach(
+        function (button) {
+
+
+          button.addEventListener(
+            "click",
+            function () {
+
+
+              const id =
+                button.dataset.id;
+
+
+              const item =
+                entries.find(
+                  e => e.id === id
+                );
+
+
+              if (!item) {
+                return;
+              }
+
+
+              const confirmed =
+                confirm(
+                  "ต้องการลบ " +
+                  item.subj +
+                  " หรือไม่?"
+                );
+
+
+              if (!confirmed) {
+                return;
+              }
+
+
+              entries =
+                entries.filter(
+                  e => e.id !== id
+                );
+
+
+              if (
+                editingId === id
+              ) {
+
+                exitEdit();
+
+              }
+
+
+              save();
+
+              render();
+
+            }
+          );
+
+        }
+      );
+
+
+    root
+      .querySelectorAll(".edit")
+      .forEach(
+        function (button) {
+
+
+          button.addEventListener(
+            "click",
+            function () {
+
+              startEdit(
+                button.dataset.id
+              );
+
+            }
+          );
+
+        }
+      );
+
+  }
+
+
+  /* ==================================================
+     EDIT
+  ================================================== */
+
+  function startEdit(id) {
+
+
+    const item =
+      entries.find(
+        e => e.id === id
+      );
+
+
+    if (!item) {
+      return;
+    }
+
+
+    editingId = id;
+
+
+    document.getElementById(
+      "subj"
+    ).value =
+      item.subj || "";
+
+
+    document.getElementById(
+      "category"
+    ).value =
+      item.category || "";
+
+
+    document.getElementById(
+      "date"
+    ).value =
+      item.date || "";
+
+
+    document.getElementById(
+      "time"
+    ).value =
+      item.time || "";
+
+
+    document.getElementById(
+      "room"
+    ).value =
+      item.room || "";
+
+
+    document.getElementById(
+      "note"
+    ).value =
+      item.note || "";
+
+
+    submitBtn.textContent =
+      "บันทึกการแก้ไข";
+
+
+    cancelBtn.style.display =
+      "block";
+
+
+    document
+      .querySelector(".left-column")
+      .scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+
+    document.getElementById(
+      "subj"
+    ).focus();
+
+  }
+
+
+  function exitEdit() {
+
+
+    editingId = null;
+
+
+    form.reset();
+
+
+    submitBtn.textContent =
+      "เพิ่มลงตาราง";
+
+
+    cancelBtn.style.display =
+      "none";
+
+  }
+
+
+  cancelBtn.addEventListener(
+    "click",
+    exitEdit
+  );
+
+
+  /* ==================================================
+     CLEAR ALL
+  ================================================== */
+
+  let clearConfirmTimer =
+    null;
+
+
+  function resetClearButton() {
+
+    clearTimeout(
+      clearConfirmTimer
+    );
+
+    clearAllBtn.classList.remove(
+      "confirming"
+    );
+
+    clearAllBtn.textContent =
+      "🗑️ ล้างข้อมูลทั้งหมด";
+
+  }
+
+
+  clearAllBtn.addEventListener(
+    "click",
+    function () {
+
+
+      const resultBox =
+        document.getElementById(
+          "clearAllResult"
+        );
+
+
+      if (entries.length === 0) {
+
+        resultBox.textContent =
+          "ยังไม่มีข้อมูลตารางสอบให้ล้าง";
+
+        return;
+
+      }
+
+
+      if (
+        !clearAllBtn.classList.contains(
+          "confirming"
+        )
+      ) {
+
+
+        clearAllBtn.classList.add(
+          "confirming"
+        );
+
+        clearAllBtn.textContent =
+          "⚠️ แน่ใจนะ? กดอีกครั้งเพื่อล้างทั้งหมด";
+
+        resultBox.textContent =
+          "กดปุ่มนี้ซ้ำอีกครั้งภายใน 5 วินาทีเพื่อยืนยัน";
+
+
+        clearConfirmTimer =
+          setTimeout(
+            function () {
+
+              resetClearButton();
+
+              resultBox.textContent =
+                "";
+
+            },
+            5000
+          );
+
+
+        return;
+
+      }
+
+
+      resetClearButton();
+
+
+      entries = [];
+
+      editingId = null;
+
+      exitEdit();
+
+      save();
+
+      render();
+
+
+      resultBox.textContent =
+        "✅ ล้างข้อมูลตารางสอบทั้งหมดแล้ว";
+
+    }
+  );
+
+
+  /* ==================================================
+     FORM SUBMIT
+  ================================================== */
+
+  form.addEventListener(
+    "submit",
+    function (event) {
+
+
+      event.preventDefault();
+
+
+      const subj =
+        document.getElementById(
+          "subj"
+        ).value.trim();
+
+
+      const category =
+        document.getElementById(
+          "category"
+        ).value;
+
+
+      const date =
+        document.getElementById(
+          "date"
+        ).value;
+
+
+      const time =
+        document.getElementById(
+          "time"
+        ).value;
+
+
+      const room =
+        document.getElementById(
+          "room"
+        ).value.trim();
+
+
+      const note =
+        document.getElementById(
+          "note"
+        ).value.trim();
+
+
+      if (!subj || !date) {
+        return;
+      }
+
+
+      /* EDIT */
+
+      if (editingId) {
+
+
+        const item =
+          entries.find(
+            e => e.id === editingId
+          );
+
+
+        if (item) {
+
+          item.subj =
+            subj;
+
+          item.category =
+            category;
+
+          item.date =
+            date;
+
+          item.time =
+            time;
+
+          item.room =
+            room;
+
+          item.note =
+            note;
+
+        }
+
+
+        exitEdit();
+
+      }
+
+
+      /* ADD */
+
+      else {
+
+
+        entries.push({
+
+          id:
+            Date.now()
+              .toString(36) +
+            Math.random()
+              .toString(36)
+              .slice(2, 7),
+
+          subj,
+
+          category,
+
+          date,
+
+          time,
+
+          room,
+
+          note
+
+        });
+
+
+        form.reset();
+
+      }
+
+
+      save();
+
+      render();
+
+    }
+  );
+
+
+  /* ==================================================
+     BULK IMPORT
+  ================================================== */
+
+  const THAI_MONTHS = [
+
+    "ม.ค.",
+    "ก.พ.",
+    "มี.ค.",
+    "เม.ย.",
+    "พ.ค.",
+    "มิ.ย.",
+    "ก.ค.",
+    "ส.ค.",
+    "ก.ย.",
+    "ต.ค.",
+    "พ.ย.",
+    "ธ.ค."
+
+  ];
+
+
+  const monthPattern =
+    THAI_MONTHS
+      .map(
+        m =>
+          m.replace(
+            ".",
+            "\\."
+          )
+      )
+      .join("|");
+
+
+  const dateRe =
+    new RegExp(
+      "(\\d{1,2})\\s*(" +
+      monthPattern +
+      ")\\s*(\\d{4})"
+    );
+
+
+  const timeRe =
+    /(\d{1,2}:\d{2})\s*-\s*(\d{1,2}:\d{2})/;
+
+
+  function pad2(n) {
+
+    return n < 10
+      ? "0" + n
+      : String(n);
+
+  }
+
+
+  function parseBulkText(raw) {
+
+
+    const lines =
+      raw
+        .split(/\r?\n/)
+        .map(
+          line => line.trim()
+        )
+        .filter(Boolean);
+
+
+    const codeRe =
+      /^\d{4,8}-\d{2,5}$/;
+
+
+    const codeIndexes = [];
+
+
+    lines.forEach(
+      function (line, index) {
+
+        if (
+          codeRe.test(line)
+        ) {
+
+          codeIndexes.push(
+            index
+          );
+
+        }
+
+      }
+    );
+
+
+    const parsed = [];
+
+    const skipped = [];
+
+
+    for (
+      let k = 0;
+      k < codeIndexes.length;
+      k++
+    ) {
+
+
+      const start =
+        codeIndexes[k];
+
+
+      const end =
+        k + 1 <
+        codeIndexes.length
+          ? codeIndexes[k + 1]
+          : lines.length;
+
+
+      const slice =
+        lines.slice(
+          start,
+          end
+        );
+
+
+      if (slice.length < 6) {
+
+        skipped.push(
+          slice[0] +
+          " (ข้อมูลไม่ครบ)"
+        );
+
+        continue;
+
+      }
+
+
+      const code =
+        slice[0];
+
+
+      const nameTh =
+        slice[2];
+
+
+      const section =
+        slice[3];
+
+
+      const examType =
+        slice[4];
+
+
+      const detail =
+        slice[5];
+
+
+      const dateMatch =
+        detail.match(
+          dateRe
+        );
+
+
+      const timeMatch =
+        detail.match(
+          timeRe
+        );
+
+
+      if (!dateMatch) {
+
+        skipped.push(
+          code +
+          " — " +
+          examType +
+          " (ยังไม่ประกาศวันที่)"
+        );
+
+        continue;
+
+      }
+
+
+      const day =
+        parseInt(
+          dateMatch[1],
+          10
+        );
+
+
+      const monthIndex =
+        THAI_MONTHS.indexOf(
+          dateMatch[2]
+        );
+
+
+      const yearCE =
+        parseInt(
+          dateMatch[3],
+          10
+        ) - 543;
+
+
+      const iso =
+        yearCE +
+        "-" +
+        pad2(
+          monthIndex + 1
+        ) +
+        "-" +
+        pad2(day);
+
+
+      let room =
+        detail.replace(
+          dateMatch[0],
+          ""
+        );
+
+
+      if (timeMatch) {
+
+        room =
+          room.replace(
+            timeMatch[0],
+            ""
+          );
+
+      }
+
+
+      room =
+        room
+          .trim()
+          .replace(
+            /\s+/g,
+            " "
+          );
+
+
+      const noteParts = [
+        code,
+        examType
+      ];
+
+
+      if (timeMatch) {
+
+        noteParts.push(
+          "เวลา " +
+          timeMatch[1] +
+          "-" +
+          timeMatch[2]
+        );
+
+      }
+
+
+      noteParts.push(
+        "กลุ่ม " +
+        section
+      );
+
+
+      const typeUpper =
+        examType.toUpperCase();
+
+
+      let category = "";
+
+
+      if (
+        typeUpper.indexOf(
+          "MID"
+        ) === 0
+      ) {
+
+        category = "mid";
+
+      }
+
+
+      else if (
+        typeUpper.indexOf(
+          "FINAL"
+        ) === 0
+      ) {
+
+        category = "final";
+
+      }
+
+
+      parsed.push({
+
+        subj:
+          nameTh,
+
+        category,
+
+        date:
+          iso,
+
+        time:
+          timeMatch
+            ? timeMatch[1]
+            : "",
+
+        room,
+
+        note:
+          noteParts.join(
+            " · "
+          ),
+
+        _key:
+          code +
+          "|" +
+          examType +
+          "|" +
+          iso +
+          "|" +
+          (
+            timeMatch
+              ? timeMatch[1]
+              : ""
+          )
+
+      });
+
+    }
+
+
+    return {
+      parsed,
+      skipped
+    };
+
+  }
+
+
+  document
+    .getElementById(
+      "bulkParseBtn"
+    )
+    .addEventListener(
+      "click",
+      function () {
+
+
+        const textarea =
+          document.getElementById(
+            "bulkText"
+          );
+
+
+        const resultBox =
+          document.getElementById(
+            "bulkResult"
+          );
+
+
+        const raw =
+          textarea.value;
+
+
+        if (!raw.trim()) {
+
+          resultBox.textContent =
+            "⚠️ ยังไม่ได้วางข้อความ";
+
+          return;
+
+        }
+
+
+        const {
+          parsed,
+          skipped
+        } =
+          parseBulkText(
+            raw
+          );
+
+
+        const existingKeys =
+          new Set(
+            entries
+              .map(
+                e => e._key
+              )
+              .filter(Boolean)
+          );
+
+
+        let added = 0;
+
+        let duplicated = 0;
+
+
+        parsed.forEach(
+          function (item) {
+
+
+            if (
+              existingKeys.has(
+                item._key
+              )
+            ) {
+
+              duplicated++;
+
+              return;
+
+            }
+
+
+            entries.push({
+
+              id:
+                Date.now()
+                  .toString(36) +
+                Math.random()
+                  .toString(36)
+                  .slice(2, 7),
+
+              ...item
+
+            });
+
+
+            existingKeys.add(
+              item._key
+            );
+
+
+            added++;
+
+          }
+        );
+
+
+        save();
+
+        render();
+
+
+        let message =
+          "✅ เพิ่มแล้ว " +
+          added +
+          " รายการ";
+
+
+        if (
+          duplicated > 0
+        ) {
+
+          message +=
+            " · ข้ามข้อมูลซ้ำ " +
+            duplicated +
+            " รายการ";
+
+        }
+
+
+        if (
+          skipped.length > 0
+        ) {
+
+          message +=
+            " · ยังไม่ประกาศวันสอบ " +
+            skipped.length +
+            " รายการ";
+
+        }
+
+
+        resultBox.textContent =
+          message;
+
+
+        textarea.value = "";
+
+      }
+    );
+
+
+  /* ==================================================
+     VIEW SWITCH
+  ================================================== */
+
+  btnReport.addEventListener(
+    "click",
+    function () {
+
+
+      btnReport.classList.add(
+        "active"
+      );
+
+
+      btnTable.classList.remove(
+        "active"
+      );
+
+
+      reportView.style.display =
+        "";
+
+
+      tableView.style.display =
+        "none";
+
+
+      viewTitle.textContent =
+        "รายงานรายวิชา";
+
+
+      viewDescription.textContent =
+        "ดูแต่ละวิชาและวันสอบของวิชานั้นทั้งหมด";
+
+    }
+  );
+
+
+  btnTable.addEventListener(
+    "click",
+    function () {
+
+
+      btnTable.classList.add(
+        "active"
+      );
+
+
+      btnReport.classList.remove(
+        "active"
+      );
+
+
+      tableView.style.display =
+        "";
+
+
+      reportView.style.display =
+        "none";
+
+
+      viewTitle.textContent =
+        "ตารางสอบ";
+
+
+      viewDescription.textContent =
+        "แยกตามประเภทการสอบ โดยแสดงกลางภาคก่อน";
+
+    }
+  );
+
+
+  /* ==================================================
+     RENDER
+  ================================================== */
+
+  function render() {
+
+    renderSummary();
+
+    renderReport();
+
+    renderTable();
+
+  }
+
+
+  render();
+
+
+})();
+
+</script>
+
+
+</body>
+
+</html>
+```
